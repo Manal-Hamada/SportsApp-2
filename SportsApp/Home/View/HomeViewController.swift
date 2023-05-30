@@ -9,7 +9,7 @@ class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectio
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+         getDate()
     }
     
    
@@ -55,6 +55,22 @@ class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectio
     }
 
     
+    func setEventBeUrl(index : Int)-> String{
+        
+        switch index {
+            
+        case 0 :
+            return upComingEventUrlBase
+        case 1 :
+            return upComingBasketBallEventUrlBase
+        case 2 :
+           return upComingCricketEventUrlBase
+        default :
+            return upComingTennisEventUrlBase
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width=UIScreen.main.bounds.width
@@ -69,6 +85,7 @@ class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectio
         let legues = segue.destination as! LeguesViewController, index = homeCollection.indexPathsForSelectedItems?.first
         legues.headerTitle = homeLotties[index?.row ?? 0].name
         legues.url = urlEndPoints[index?.row ?? 0]
+        legues.eventBaseUrl = setEventBeUrl(index: index?.row ?? 0)
         
     }
 }

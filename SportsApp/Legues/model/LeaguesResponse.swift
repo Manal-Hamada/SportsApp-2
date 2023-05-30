@@ -9,7 +9,7 @@ import Foundation
 
 
 
-class LeguesResponse : Decodable{
+class LeguesResponse : Codable{
     
     var success:Int?
     var result: [Legue]
@@ -22,12 +22,13 @@ class LeguesResponse : Decodable{
     }
 }
 
-class Legue : Decodable {
-        
+class Legue : Codable {
         var league_key : Int?
         var league_name : String?
         var country_key : Int?
         var country_name : String?
         var league_logo : String?
         var country_logo : String?
+    
+  
     }
