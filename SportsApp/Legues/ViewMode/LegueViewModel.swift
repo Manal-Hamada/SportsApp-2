@@ -10,7 +10,7 @@ import Foundation
 class LegueViewModel{
     
     var url : String!
-    var networkManager : NetworkManager = NetworkManager()
+    var networkManager : NetworkManagerType!
     var bindResultToViewController : (()->()) = {}
     var result : [Legue]!{
         didSet{
@@ -19,18 +19,20 @@ class LegueViewModel{
     }
 
  
-    
+    init(networkManager : NetworkManagerType){
+        self.networkManager=networkManager
+    }
     func fetchLegues(url:String){
         
         networkManager.fetchLegues(url: url) {  [weak self] (result : LeguesResponse?) in
            
-            print(result?.result[0].country_name ?? "ddddddddd")
+            print(result?.result[0].country_name ?? "")
                 self?.result = result?.result
                 
-            
-
-           
+  
         }
        
     }
+    
+ 
 }

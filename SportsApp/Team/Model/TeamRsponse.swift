@@ -8,6 +8,11 @@ import Foundation
 class TeamResponse: Decodable {
     var success: Int?
     var result: [Team]?
+    
+    init(success: Int? , result: [Team]?) {
+        self.success = success
+        self.result = result
+    }
 }
 
 class Team: Decodable {

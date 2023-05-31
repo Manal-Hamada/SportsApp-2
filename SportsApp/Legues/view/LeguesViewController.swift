@@ -12,8 +12,11 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
     
     var url :String!
     var eventBaseUrl: String!
+    var teamBaseUrl: String!
+    var resultBaseUrl: String!
     var headerTitle:String!
     var viewModel : LegueViewModel!
+    var networkManager : NetworkManagerType!
     var leguesList : Array<Legue>!
     
     override func viewDidLoad() {
@@ -21,7 +24,8 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
         leguesList = []
         print(url ?? "")
         self.displayCellView()
-        viewModel = LegueViewModel()
+        networkManager = NetworkManager()
+        viewModel = LegueViewModel(networkManager: networkManager)
         viewModel.bindResultToViewController = {[weak self ] in
             DispatchQueue.main.async { [self] in
                 self?.leguesList = self?.viewModel.result
@@ -30,17 +34,17 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
             }
         }
         
-      /*  let reachability = try! Reachability()
-        if reachability.connection != .unavailable{
-            viewModel.fetchLegues(url: url)
-        }
-        else{
-            let alert : UIAlertController = UIAlertController(title: "ALERT!", message: "No Connection", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel,handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }*/
-       
+        /*  let reachability = try! Reachability()
+         if reachability.connection != .unavailable{
+         viewModel.fetchLegues(url: url)
+         }
+         else{
+         let alert : UIAlertController = UIAlertController(title: "ALERT!", message: "No Connection", preferredStyle: .alert)
+         
+         alert.addAction(UIAlertAction(title: "OK", style: .cancel,handler: nil))
+         self.present(alert, animated: true, completion: nil)
+         }*/
+        
         viewModel.fetchLegues(url: url)
         
     }
@@ -100,7 +104,9 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "segue", sender: self)
+          performSegue(withIdentifier: "segue", sender: self)
+ 
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -108,16 +114,20 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
         if  let events = segue.destination as? LeguesDetails{
             
             let selectedRow = leguesList[legusTable.indexPathForSelectedRow?.row ?? 0]
-            print(" Legue key is\(selectedRow.league_key ?? 0)")
-            events.upcomingEventUrl = "\(String(describing: upComingEventUrlBase))\(String(describing: selectedRow.league_key))&from=\(currentDate)&to=\(currentDatePlusYear)&APIkey=\(API_KEY)"
-            events.latestResultUrl = "\(String(describing: upComingEventUrlBase))\(String(describing: selectedRow.league_key))&from=\(currentDate)&to=\(currentMinsYear)&APIkey=\(API_KEY)"
+            
+            events.upcomingEventUrl = eventBaseUrl
+            events.latestResultUrl = resultBaseUrl
+            events.teamsUrl = teamBaseUrl
             events.legue = selectedRow
             legusTable.deselectRow(at: legusTable.indexPathForSelectedRow!, animated: true)
+            
+            
+            // self.present(events, animated: true,completion: nil)
             
         }
         
     }
     
+    
+    
 }
-
-

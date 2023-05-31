@@ -11,8 +11,9 @@ import UIKit
 
 protocol LocalDbManagerType{
     
-    func insertLegue(favLegue:Legue)
+    func insertLegue(favLegue:Legue,eventsUrl:String,resultUrl:String,teamsUrl:String)
     func FetchLegues()->Array<Legue>
+    func fetchfavModels()->Array<FavModel>
     func deleteLegue(legueName:String)
 }
 
@@ -22,6 +23,7 @@ class LocalDbManager : LocalDbManagerType{
     
     var manager : NSManagedObjectContext?
     var favLegues : [NSManagedObject] = []
+    var favModels : [NSManagedObject] = []
     var legueToBeDeleted : NSManagedObject?
     static var localDbManager = LocalDbManager()
     
@@ -31,7 +33,7 @@ class LocalDbManager : LocalDbManagerType{
         manager = appDelegate.persistentContainer.viewContext
     }
     
-    func insertLegue(favLegue:Legue){
+    func insertLegue(favLegue:Legue,eventsUrl:String,resultUrl:String,teamsUrl:String){
         
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: manager! )
         let legue = NSManagedObject(entity: entity!, insertInto: manager)
@@ -39,6 +41,10 @@ class LocalDbManager : LocalDbManagerType{
         legue.setValue(favLegue.league_key, forKey: "legueKey")
         legue.setValue(favLegue.league_name, forKey: "legueName")
         legue.setValue(favLegue.league_logo, forKey: "legueLogo")
+        legue.setValue(eventsUrl, forKey: "eventUrl")
+        legue.setValue(resultUrl, forKey: "resultUrl")
+        legue.setValue(teamsUrl, forKey: "teamsUrl")
+        
         legue.setValue(true, forKey: "isFav")
         
         do{
@@ -59,6 +65,27 @@ class LocalDbManager : LocalDbManagerType{
             print(legues.count)
             for item in favLegues{
                 legues.append(setLegueData(item: item))
+                
+            }
+            
+        }
+        
+        catch let error{
+            print(error.localizedDescription)
+        }
+        
+        return legues
+    }
+    
+    func fetchfavModels()->Array<FavModel>{
+        let fetch = NSFetchRequest<NSManagedObject>(entityName:entityName)
+        var legues :Array<FavModel>=[]
+        
+        do{
+            favModels = try manager!.fetch(fetch)
+            print(legues.count)
+            for item in favModels{
+                legues.append(setFavLeguUrls(item: item))
                 
             }
             
@@ -110,5 +137,16 @@ class LocalDbManager : LocalDbManagerType{
             print(error.localizedDescription)
         }
         
+    }
+    func setFavLeguUrls(item:NSManagedObject)->FavModel{
+        
+        let legue = FavModel()
+        
+        legue.eventUrl = (item.value(forKey: "eventUrl") as? String) ?? ""
+        legue.resultUrl = (item.value(forKey: "resultUrl") as? String) ?? ""
+        legue.teamsUrl = (item.value(forKey: "teamsUrl") as? String) ?? ""
+       
+        
+        return legue
     }
 }

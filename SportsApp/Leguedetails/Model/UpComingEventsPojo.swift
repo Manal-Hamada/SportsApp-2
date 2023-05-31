@@ -12,7 +12,7 @@ class UpComingEventResponse : Decodable {
     
     var result : [Result]
     var success : Int?
-    init(result: [Result], success: Int? = nil) {
+    init(result: [Result], success: Int? ) {
         self.result = result
         self.success = success
     }

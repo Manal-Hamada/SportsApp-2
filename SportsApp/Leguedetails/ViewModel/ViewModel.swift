@@ -6,7 +6,7 @@ class ViewModel {
     var url : String!
     var latestResultUrl : String!
     var teamsUrl : String!
-    var networkManager : NetworkManager = NetworkManager()
+    var networkManager : NetworkManagerType!
     var bindEventsresultToViewController : (()->()) = {}
     var bindLatestResultToViewController : (()->()) = {}
     var bindTeamsToViewController : (()->()) = {}
@@ -26,6 +26,10 @@ class ViewModel {
         }
     }
     
+    init(networkManager:NetworkManagerType){
+        
+        self.networkManager=networkManager
+    }
     
     func fetchLegueUpcommingEvents(url:String){
         

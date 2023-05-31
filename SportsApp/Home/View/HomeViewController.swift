@@ -1,5 +1,4 @@
 import UIKit
-import Lottie
 import Alamofire
 
 
@@ -45,14 +44,14 @@ class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectio
         view.layer.mask = rectShape
     }
     
-    func setAnimatedImg(animatedImg:LottieAnimationView,fileName:String){
+   /* func setAnimatedImg(animatedImg:LottieAnimationView,fileName:String){
        
           animatedImg.animation = LottieAnimation.named(fileName)
           animatedImg.contentMode = .scaleAspectFit
           animatedImg.loopMode = .loop
           animatedImg.animationSpeed = 0.5
           animatedImg.play()
-    }
+    }*/
 
     
     func setEventBeUrl(index : Int)-> String{
@@ -67,6 +66,24 @@ class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectio
            return upComingCricketEventUrlBase
         default :
             return upComingTennisEventUrlBase
+        }
+        
+    }
+    
+
+    
+    func setTeamBeUrl(index : Int)-> String{
+        
+        switch index {
+            
+        case 0 :
+            return footballTeamsBaseUrl
+        case 1 :
+            return basketballTeamsBaseUrl
+        case 2 :
+           return cricketTeamsBaseUrl
+        default :
+            return tennisTeamsBaseUrl
         }
         
     }
@@ -86,6 +103,8 @@ class HomeViewController: UIViewController ,UICollectionViewDelegate,UICollectio
         legues.headerTitle = homeLotties[index?.row ?? 0].name
         legues.url = urlEndPoints[index?.row ?? 0]
         legues.eventBaseUrl = setEventBeUrl(index: index?.row ?? 0)
+        legues.resultBaseUrl = setEventBeUrl(index: index?.row ?? 0)
+        legues.teamBaseUrl = setTeamBeUrl(index: index?.row ?? 0)
         
     }
 }

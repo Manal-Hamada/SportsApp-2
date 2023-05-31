@@ -32,10 +32,11 @@
 		041E63322A26215700E1381D /* TeamRsponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E63312A26215700E1381D /* TeamRsponse.swift */; };
 		041E63342A26239700E1381D /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E63332A26239700E1381D /* TeamViewModel.swift */; };
 		041E9B0E2A1856C100608962 /* cricket.json in Resources */ = {isa = PBXBuildFile; fileRef = 041E9B0D2A1856C000608962 /* cricket.json */; };
+		041FB1272A27027E00570689 /* MokeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FB1262A27027E00570689 /* MokeNetwork.swift */; };
+		0439D8492A26C0880018E2E5 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D8482A26C0870018E2E5 /* TeamTableViewCell.swift */; };
+		0439D84C2A26E66C0018E2E5 /* FavModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D84B2A26E66C0018E2E5 /* FavModel.swift */; };
+		0439D84E2A26F1260018E2E5 /* FakeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D84D2A26F1260018E2E5 /* FakeNetworkManager.swift */; };
 		044FF5672A17753D006B9160 /* LeaguesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044FF5662A17753D006B9160 /* LeaguesResponse.swift */; };
-		046D3CC72A265AC3000785DB /* LegueApiResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 046D3CC62A265AC3000785DB /* LegueApiResponse.json */; };
-		046D3CCB2A265C02000785DB /* LeguesBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D3CCA2A265C02000785DB /* LeguesBundle.swift */; };
-		046D3CCD2A265CE1000785DB /* LeguesApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D3CCC2A265CE1000785DB /* LeguesApiTest.swift */; };
 		047A40BE2A256909003AA838 /* LegueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A40BC2A256909003AA838 /* LegueTableViewCell.swift */; };
 		047A40BF2A256909003AA838 /* LegueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047A40BD2A256909003AA838 /* LegueTableViewCell.xib */; };
 		047A40C12A257090003AA838 /* favouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A40C02A257090003AA838 /* favouriteViewModel.swift */; };
@@ -97,10 +98,11 @@
 		041E63312A26215700E1381D /* TeamRsponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRsponse.swift; sourceTree = "<group>"; };
 		041E63332A26239700E1381D /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		041E9B0D2A1856C000608962 /* cricket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cricket.json; sourceTree = "<group>"; };
+		041FB1262A27027E00570689 /* MokeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MokeNetwork.swift; sourceTree = "<group>"; };
+		0439D8482A26C0870018E2E5 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
+		0439D84B2A26E66C0018E2E5 /* FavModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavModel.swift; sourceTree = "<group>"; };
+		0439D84D2A26F1260018E2E5 /* FakeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkManager.swift; sourceTree = "<group>"; };
 		044FF5662A17753D006B9160 /* LeaguesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesResponse.swift; sourceTree = "<group>"; };
-		046D3CC62A265AC3000785DB /* LegueApiResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LegueApiResponse.json; sourceTree = "<group>"; };
-		046D3CCA2A265C02000785DB /* LeguesBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeguesBundle.swift; sourceTree = "<group>"; };
-		046D3CCC2A265CE1000785DB /* LeguesApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeguesApiTest.swift; sourceTree = "<group>"; };
 		047A40BC2A256909003AA838 /* LegueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegueTableViewCell.swift; sourceTree = "<group>"; };
 		047A40BD2A256909003AA838 /* LegueTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegueTableViewCell.xib; sourceTree = "<group>"; };
 		047A40C02A257090003AA838 /* favouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteViewModel.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				041B7B362A16D8AD000110AA /* Favourites */,
 				041B7B352A16D8A0000110AA /* Home */,
 				041B7B022A16D5DE000110AA /* AppDelegate.swift */,
+				041B7B042A16D5DE000110AA /* SceneDelegate.swift */,
 				041B7B0E2A16D5E0000110AA /* Assets.xcassets */,
 				041B7B102A16D5E0000110AA /* LaunchScreen.storyboard */,
 				041B7B132A16D5E0000110AA /* Info.plist */,
@@ -231,9 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				041B7B1C2A16D5E0000110AA /* SportsAppTests.swift */,
-				046D3CC62A265AC3000785DB /* LegueApiResponse.json */,
-				046D3CCA2A265C02000785DB /* LeguesBundle.swift */,
-				046D3CCC2A265CE1000785DB /* LeguesApiTest.swift */,
+				0439D84D2A26F1260018E2E5 /* FakeNetworkManager.swift */,
+				041FB1262A27027E00570689 /* MokeNetwork.swift */,
 			);
 			path = SportsAppTests;
 			sourceTree = "<group>";
@@ -258,6 +260,7 @@
 		041B7B362A16D8AD000110AA /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
+				0439D84A2A26E6580018E2E5 /* Model */,
 				047A40C52A257FC8003AA838 /* ViewModel */,
 				041B7B402A16DC81000110AA /* View */,
 			);
@@ -295,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				041E63302A261C6400E1381D /* Model */,
-				041B7B042A16D5DE000110AA /* SceneDelegate.swift */,
 				041E632F2A261C5100E1381D /* ViewModel */,
 				041E632C2A261C1C00E1381D /* View */,
 			);
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				041E632D2A261C4C00E1381D /* TeamViewController.swift */,
+				0439D8482A26C0870018E2E5 /* TeamTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,6 +335,14 @@
 				044FF5662A17753D006B9160 /* LeaguesResponse.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		0439D84A2A26E6580018E2E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0439D84B2A26E66C0018E2E5 /* FavModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		044FF5642A1774D7006B9160 /* Networking */ = {
@@ -567,7 +578,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				046D3CC72A265AC3000785DB /* LegueApiResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +702,7 @@
 				041A96212A1D471600E116DD /* NetworkManager.swift in Sources */,
 				044FF5672A17753D006B9160 /* LeaguesResponse.swift in Sources */,
 				0418FD822A1D0E940066F338 /* ViewModel.swift in Sources */,
+				0439D8492A26C0880018E2E5 /* TeamTableViewCell.swift in Sources */,
 				047A40C42A257569003AA838 /* LocalDbManager.swift in Sources */,
 				04CAEA832A1B962A00462F8D /* LeguesDetails.swift in Sources */,
 				0419ADAD2A1C45FD00FEDF7D /* UpComingEventsPojo.swift in Sources */,
@@ -701,6 +712,7 @@
 				04CAEA902A1B99A800462F8D /* teamCell.swift in Sources */,
 				04CAEA8C2A1B998300462F8D /* UpComingEventCell.swift in Sources */,
 				047A40C12A257090003AA838 /* favouriteViewModel.swift in Sources */,
+				0439D84C2A26E66C0018E2E5 /* FavModel.swift in Sources */,
 				041B7B392A16D8D7000110AA /* HomeViewController.swift in Sources */,
 				041E632E2A261C4C00E1381D /* TeamViewController.swift in Sources */,
 				041B7B032A16D5DE000110AA /* AppDelegate.swift in Sources */,
@@ -718,9 +730,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				046D3CCD2A265CE1000785DB /* LeguesApiTest.swift in Sources */,
-				046D3CCB2A265C02000785DB /* LeguesBundle.swift in Sources */,
 				041B7B1D2A16D5E0000110AA /* SportsAppTests.swift in Sources */,
+				0439D84E2A26F1260018E2E5 /* FakeNetworkManager.swift in Sources */,
+				041FB1272A27027E00570689 /* MokeNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

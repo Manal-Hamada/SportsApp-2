@@ -1,7 +1,15 @@
 import Foundation
 import Alamofire
-class NetworkManager{
-    
+
+
+protocol NetworkManagerType{
+    func fetchLeguesUpCommingEvents(url:String,compilitionHandler: @escaping (UpComingEventResponse?) -> Void)
+    func fetchLegues(url:String,compilitionHandler: @escaping (LeguesResponse?) -> Void)
+    func fetchLeguesLatestResults(url:String,compilitionHandler: @escaping (LeguesResponse?) -> Void)
+    //func fetchLegueTeams(url:String,compilitionHandler: @escaping (LeguesResponse?) -> Void)
+    func fetchTeamDetails(url:String,compilitionHandler: @escaping (TeamResponse?) -> Void)
+}
+class NetworkManager :NetworkManagerType{
     
     func fetchLeguesUpCommingEvents(url:String,compilitionHandler: @escaping (UpComingEventResponse?) -> Void) {
         
@@ -28,8 +36,7 @@ class NetworkManager{
                 return }
             print("from fetch \(String(describing: events.result[0].country_name) )")
             compilitionHandler(events)
-            
-            
+     
         }
         
     }
@@ -70,7 +77,7 @@ class NetworkManager{
             guard let teams = response.value else {
                 print("No response")
                 return }
-            print("from fetch teams \(String(describing: teams.result![0].players?.count)) ")
+          
             compilitionHandler(teams)
             
             

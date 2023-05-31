@@ -14,12 +14,12 @@ protocol TeamViewModelType {
 }
 class TeamViewModel{
     
-    var networkManager : NetworkManager!
+    var networkManager : NetworkManagerType!
     var team : Team!
     var bindTeamDetailsToViewController: (() -> ())?
     var teams : [Team]?
     
-    init(networkManager:NetworkManager){
+    init(networkManager:NetworkManagerType){
         self.networkManager = networkManager
       
     }

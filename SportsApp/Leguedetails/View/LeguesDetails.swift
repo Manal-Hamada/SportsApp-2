@@ -11,64 +11,109 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
     var teamsUrl :String!
     var favViewModel : FavouriteViewMoodel!
     var localDbManager:LocalDbManager!
+    var teamViewModel : TeamViewModel!
+    var networkManager : NetworkManagerType!
     var legue : Legue!
     var upComingEvents : [Result]? = []
     var latestResult : [Result]? = []
-    var teams : [Result]? = []
     var viewModel : ViewModel!
+    var isFav : Bool = false
     var collectionLayout : UICollectionViewLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLayout()
-        viewModel = ViewModel()
+        networkManager = NetworkManager()
+        teamViewModel = TeamViewModel(networkManager: networkManager)
+     
+        viewModel = ViewModel(networkManager: networkManager)
         localDbManager = LocalDbManager.localDbManager
         favViewModel = FavouriteViewMoodel(networkManager: localDbManager)
-        latestResult = [Result(),Result(),Result(),Result()]
-        getLeguesEventData()
-        getLeguesEventData()
-        
+        getDate()
+        print("latessssssss\(currentMinsYear)")
+        upcomingEventUrl = "\(upcomingEventUrl ?? "")\(legue.league_key ?? 0)&from=\(currentDate)&to=\(currentDatePlusYear)&APIkey=\(API_KEY)"
+        latestResultUrl = "\(latestResultUrl ?? "")\(legue.league_key ?? 0 )&from=\(currentMinsYear)&to=\(currentDate)&APIkey=\(API_KEY)"
+        teamsUrl = "\(teamsUrl ?? "")\(legue.league_key ?? 0)&APIkey=\(API_KEY)"
+        print("///////////////////////////////////////////////////////////")
+        print(latestResultUrl ?? "latest resultn url")
     }
     
-   
-    func getLeguesEventData(){
-        self.viewModel.bindEventsresultToViewController = {[weak self ] in
-            DispatchQueue.main.async { [self] in
-                self?.upComingEvents = self?.viewModel.result
-                self!.myCollection.reloadData()
-                
-            }
-            
-        }
-        viewModel.fetchLegueUpcommingEvents(url: upcomingEventUrl)
-        
-    }
     
-    func getLeguesLatestResultData(){
-        self.viewModel.bindLatestResultToViewController = {[weak self ] in
-            DispatchQueue.main.async { [self] in
-                self?.latestResult = self?.viewModel.latestResult
-                self!.myCollection.reloadData()
-                
-            }
-            
-        }
-        viewModel.fetchLegueUpcommingEvents(url: upcomingEventUrl)
-        
-    }
+
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         myCollection.reloadData()
-        upComingEvents = viewModel.result
+        isLegueFav()
+     
+       // print("teams url \(String(describing: teamBaseUrl))\(String(describing: selectedRow.league_key))&APIkey=\(API_KEY)")
+        
+       // latestResult = [Result(),Result(),Result(),Result()]
+        getTeams()
+        getLeguesEventData()
+        getLeguesLatestResultData()
+        setLayout()
     }
     
+
+func getLeguesEventData(){
+    self.viewModel.bindEventsresultToViewController = {[weak self ] in
+        DispatchQueue.main.async { [self] in
+            self?.upComingEvents = self?.viewModel.result
+            self!.myCollection.reloadData()
+            
+        }
+        
+    }
+    viewModel.fetchLegueUpcommingEvents(url: upcomingEventUrl)
     
+}
+
+func getLeguesLatestResultData(){
+    self.viewModel.bindLatestResultToViewController = {[weak self ] in
+        DispatchQueue.main.async { [self] in
+            self?.latestResult = self?.viewModel.latestResult
+            self!.myCollection.reloadData()
+            
+        }
+        
+    }
+  
+    viewModel.fetchLegueLatestResult(url: latestResultUrl)
+    
+}
+
+    func getTeams(){
+        
+        self.teamViewModel?.bindTeamDetailsToViewController = {[weak self] in
+            DispatchQueue.main.async {
+                self!.myCollection.reloadData()
+                print(self?.teamViewModel.getTeams().count ?? "No teams")
+                
+            }
+        }
+ 
+        teamViewModel.getTeamDetails(url:teamsUrl)
+ 
+    }
     @IBAction func addToFavourite(_ sender: Any) {
         
-        favbtn.image = UIImage(systemName: "suit.heart.fill")
-        favViewModel.insertLegue(favLegue: legue)
+        
+        let viewModel = FavouriteViewMoodel(networkManager: LocalDbManager.localDbManager)
+        
+        if isFav == false {
+            
+            favbtn.image = UIImage(systemName: "suit.heart.fill")
+            favViewModel.insertLegue(favLegue: legue, upcomingEventUrl: upcomingEventUrl, latestResultUrl: latestResultUrl, teamsUrl: teamsUrl)
+            isFav = true
+            viewModel.getLegues()
+        }
+        else{
+            favbtn.image = UIImage(systemName: "suit.heart")
+            favViewModel.deleteLegue(legueName: legue.league_name ?? "Un Known")
+            isFav = false
+            viewModel.getLegues()
+        }
     }
     
     func setLayout(){
@@ -76,19 +121,43 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
             
             switch index{
             case 0 :
-                return /*self.drawTheTopSection()*/self.drawLatestResultSection()
+                return self.drawTheTopSection()
                 
             case 1:
                 return self.drawLatestResultSection()
             default:
-                return /*self.drawTeamsSection()*/self.drawLatestResultSection()
+                return self.drawTeamsSection()
             }
             
         }
-        
-        
+     
         myCollection.setCollectionViewLayout(layout, animated: true)
         
+    }
+    func isLegueFav(){
+        
+        let viewModel = FavouriteViewMoodel(networkManager: LocalDbManager.localDbManager)
+        viewModel.getLegues()
+        for legue in viewModel.legues{
+            
+            if legue.league_key == self.legue.league_key{
+                self.favbtn.image = UIImage(systemName: "suit.heart.fill")
+            }
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+        if indexPath.section == 2{
+            
+            let teamDetails = self.storyboard?.instantiateViewController(identifier: "teamDetals") as! TeamViewController
+            
+            teamDetails.team = teamViewModel.getTeam(row: indexPath.row)
+            teamDetails.url = teamsUrl
+            self.present(teamDetails, animated: true,completion: nil)
+        }
+       
     }
     
     func drawTheTopSection() -> NSCollectionLayoutSection{
@@ -101,15 +170,6 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 16, trailing: 0)
         
-        /*  section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-         items.forEach { item in
-         let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-         let minScale: CGFloat = 0.8
-         let maxScale: CGFloat = 1.0
-         let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-         item.transform = CGAffineTransform(scaleX: scale, y: scale)
-         }
-         }*/
         
         return section
     }
@@ -122,30 +182,31 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 70, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0)
         
         return section
     }
     
     func drawTeamsSection()-> NSCollectionLayoutSection{
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(2))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension:  .absolute(100))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35), heightDimension:  .absolute(130))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 16, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
         
         return section
     }
     
     
-    
+     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0 :
@@ -153,7 +214,7 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         case 1:
             return latestResult?.count ?? 1
         default :
-            return teams?.count ?? 1
+            return teamViewModel.getTeams().count
         }
         
     }
@@ -164,7 +225,7 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         case 0 :
             let cell = myCollection.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! UpComingEventCell
             
-            let url1 = URL(string: upComingEvents?[indexPath.row].event_home_team ?? "")
+            let url1 = URL(string: upComingEvents?[indexPath.row].home_team_logo ?? "")
             let url2 = URL(string: upComingEvents?[indexPath.row] .away_team_logo ?? "")
             cell.layer.cornerRadius = 30.0
             cell.team1.layer.cornerRadius = cell.team1.frame.height / 4
@@ -180,7 +241,7 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         case 1:
             let cell = myCollection.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as! LatestResultCell
             
-            let url1 = URL(string: latestResult?[indexPath.row].event_home_team ?? "")
+            let url1 = URL(string: latestResult?[indexPath.row].home_team_logo ?? "")
             let url2 = URL(string: latestResult?[indexPath.row] .away_team_logo ?? "")
             cell.layer.cornerRadius = 30.0
             cell.team1Logo.layer.cornerRadius = cell.team1Logo.frame.height / 4
@@ -196,12 +257,14 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
             return cell
             
         default :
-            // let cell = myCollection.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! teamCell
-            let cell = myCollection.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as! teamCell
-            
-            let url = URL(string: teams?[indexPath.row].event_home_team ?? "")
-            cell.layer.cornerRadius = 30.0
+         
+            let cell = myCollection.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! teamCell
+            cell.layer.cornerRadius = 20.0
+            let team = teamViewModel.getTeam(row: indexPath.row)
+            let url = URL(string: team.teamLogo ?? "")
             cell.teamImg.kf.setImage(with: url,placeholder: (UIImage(named: "sportslogo")))
+            cell.teamImg.layer.cornerRadius = cell.teamImg.frame.height/2
+            cell.teamName.text = team.teamName
             return cell
         }
         

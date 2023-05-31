@@ -9,25 +9,38 @@ import Foundation
 
 class FavouriteViewMoodel{
    
-    var networkManager : LocalDbManagerType
+    var localManager : LocalDbManagerType
     var legue : Legue!
     var bindFavLeguesToViewController: (() -> ())?
+    var bindFavModelsToViewController: (() -> ())?
     var legues : [Legue]!
+    var favModels : [FavModel]!
     
     init(networkManager : LocalDbManagerType ){
         
-        self.networkManager = networkManager
+        self.localManager = networkManager
     }
     
     func getLegues(){
         
-        self.legues = networkManager.FetchLegues()
+        self.legues = localManager.FetchLegues()
         self.bindFavLeguesToViewController
       
     }
+    
+    func getFavModels(){
+        
+        self.favModels = localManager.fetchfavModels()
+        self.bindFavModelsToViewController
+      
+    }
+    func getFavModel(row:Int) -> FavModel{
+        
+        return favModels[row]
+    }
     func getNumOfRowa() ->Int{
         
-        return legues.count
+        return legues.count ?? 1
     }
     
     func getLegue(row:Int) -> Legue{
@@ -35,15 +48,17 @@ class FavouriteViewMoodel{
         return legues[row]
     }
     
-    func insertLegue(favLegue:Legue){
+ 
+    
+    func insertLegue(favLegue: Legue,upcomingEventUrl:String,latestResultUrl:String,teamsUrl:String){
         
-        networkManager.insertLegue(favLegue: favLegue)
+        localManager.insertLegue(favLegue: favLegue, eventsUrl: upcomingEventUrl, resultUrl: latestResultUrl, teamsUrl: teamsUrl)
         
     }
     
     func deleteLegue(legueName:String){
        
-       networkManager.deleteLegue(legueName: legueName)
+       localManager.deleteLegue(legueName: legueName)
     }
     
 }

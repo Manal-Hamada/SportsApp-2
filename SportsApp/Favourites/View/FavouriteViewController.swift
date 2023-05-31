@@ -20,6 +20,7 @@ class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableView
         localDbManager = LocalDbManager.localDbManager
         viewModel = FavouriteViewMoodel(networkManager: localDbManager)
         displayCellView()
+        
       
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -40,13 +41,28 @@ class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableView
             }
         }
         viewModel.getLegues()
+        viewModel.bindFavModelsToViewController = {
+            [weak self] in
+            DispatchQueue.main.async {
+               
+        
+            }
+        }
+        viewModel.getLegues()
+        viewModel.getFavModels()
         favTable.reloadData()
     }
+    
+ 
     
     func displayCellView(){
         let nib = UINib(nibName: "LegueTableViewCell", bundle: nil)
         favTable.register(nib, forCellReuseIdentifier: "LegueTableViewCell")
   
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "favSegue", sender: self)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,7 +86,7 @@ class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
        
-        var legueTobedeleted = viewModel.getLegue(row: indexPath.row)
+        let legueTobedeleted = viewModel.getLegue(row: indexPath.row)
        if editingStyle == .delete {
            
            let alert = UIAlertController(title: "Confirmation!", message: "Remove Legue..?", preferredStyle: UIAlertController.Style.alert)
@@ -89,4 +105,27 @@ class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableView
           
        }
    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+      
+
+        getDate() // to set currentDate and plus year
+        if  let events = segue.destination as? LeguesDetails{
+            
+            let favModel = viewModel.favModels[favTable.indexPathForSelectedRow?.row ?? 0]
+            let selectedLegue = viewModel.legues[favTable.indexPathForSelectedRow?.row ?? 0]
+            
+            events.upcomingEventUrl = viewModel.getFavModel(row: favTable.indexPathForSelectedRow?.row ?? 0).eventUrl
+            events.latestResultUrl = viewModel.getFavModel(row: favTable.indexPathForSelectedRow?.row ?? 0).resultUrl
+            events.teamsUrl = viewModel.getFavModel(row: favTable.indexPathForSelectedRow?.row ?? 0).teamsUrl
+            events.legue = selectedLegue
+            favTable.deselectRow(at: favTable.indexPathForSelectedRow!, animated: true)
+            
+            
+            // self.present(events, animated: true,completion: nil)
+            
+        }
+        
+    }
 }

@@ -26,10 +26,10 @@ var upComingEventUrlBase = "https://apiv2.allsportsapi.com/football?met=Fixtures
 var upComingBasketBallEventUrlBase = "https://apiv2.allsportsapi.com/basketball?met=Fixtures&leagueId="
 var upComingTennisEventUrlBase = "https://apiv2.allsportsapi.com/tennis?met=Fixtures&leagueId="
 var upComingCricketEventUrlBase = "https://apiv2.allsportsapi.com/cricket?met=Fixtures&leagueId="
-var footballTeamsBaseUrl = "https://apiv2.allsportsapi.com/football/?&met=Teams&leagueId=3&APIkey="
-var basketballTeamsBaseUrl = "https://apiv2.allsportsapi.com/basketball/?&met=Teams&leagueId=3&APIkey="
-var tennisTeamsBaseUrl = "https://apiv2.allsportsapi.com/tennis/?&met=Teams&leagueId=3&APIkey="
-var cricketTeamsBaseUrl = "https://apiv2.allsportsapi.com/cricket/?&met=Teams&leagueId=3&APIkey="
+var footballTeamsBaseUrl = "https://apiv2.allsportsapi.com/football/?&met=Teams&leagueId="
+var basketballTeamsBaseUrl = "https://apiv2.allsportsapi.com/basketball/?&met=Teams&leagueId="
+var tennisTeamsBaseUrl = "https://apiv2.allsportsapi.com/tennis/?&met=Teams&leagueId="
+var cricketTeamsBaseUrl = "https://apiv2.allsportsapi.com/cricket/?&met=Teams&leagueId="
 var urlEndPoints = [footballUrl,basketballUrl,cricketUrl,tennisUrl]
 
 var homeLotties = [HomeCell(fileName:"footballplayer",name: "Football"),HomeCell (fileName:"basketballplayer",name: "Basketball"),HomeCell(fileName:"cricketplayer",name: "Cricket"),HomeCell(fileName:"tennisplayer",name: "Tennis")]
