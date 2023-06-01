@@ -42,6 +42,8 @@
 		047A40C12A257090003AA838 /* favouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A40C02A257090003AA838 /* favouriteViewModel.swift */; };
 		047A40C42A257569003AA838 /* LocalDbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A40C32A257569003AA838 /* LocalDbManager.swift */; };
 		047E21972A1EA09F003E29C6 /* LegueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E21962A1EA09F003E29C6 /* LegueViewModel.swift */; };
+		048575322A283BA0004FF97B /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048575312A283BA0004FF97B /* Headers.swift */; };
+		048575342A284279004FF97B /* loadingball.json in Resources */ = {isa = PBXBuildFile; fileRef = 048575332A284279004FF97B /* loadingball.json */; };
 		04CAEA832A1B962A00462F8D /* LeguesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAEA822A1B962A00462F8D /* LeguesDetails.swift */; };
 		04CAEA8C2A1B998300462F8D /* UpComingEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAEA8B2A1B998300462F8D /* UpComingEventCell.swift */; };
 		04CAEA8E2A1B999800462F8D /* LatestResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAEA8D2A1B999700462F8D /* LatestResultCell.swift */; };
@@ -108,6 +110,8 @@
 		047A40C02A257090003AA838 /* favouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteViewModel.swift; sourceTree = "<group>"; };
 		047A40C32A257569003AA838 /* LocalDbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDbManager.swift; sourceTree = "<group>"; };
 		047E21962A1EA09F003E29C6 /* LegueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegueViewModel.swift; sourceTree = "<group>"; };
+		048575312A283BA0004FF97B /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
+		048575332A284279004FF97B /* loadingball.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingball.json; sourceTree = "<group>"; };
 		04CAEA822A1B962A00462F8D /* LeguesDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeguesDetails.swift; sourceTree = "<group>"; };
 		04CAEA8B2A1B998300462F8D /* UpComingEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingEventCell.swift; sourceTree = "<group>"; };
 		04CAEA8D2A1B999700462F8D /* LatestResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestResultCell.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 		0419A6112A1789A000C161CB /* Lotties */ = {
 			isa = PBXGroup;
 			children = (
+				048575332A284279004FF97B /* loadingball.json */,
 				041E9B0D2A1856C000608962 /* cricket.json */,
 				0419A6182A17B35C00C161CB /* basketball.json */,
 				0419A6162A17B35000C161CB /* tennis.json */,
@@ -413,6 +418,7 @@
 				04CAEA8D2A1B999700462F8D /* LatestResultCell.swift */,
 				04CAEA8B2A1B998300462F8D /* UpComingEventCell.swift */,
 				04CAEA822A1B962A00462F8D /* LeguesDetails.swift */,
+				048575312A283BA0004FF97B /* Headers.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				041B7B122A16D5E0000110AA /* LaunchScreen.storyboard in Resources */,
+				048575342A284279004FF97B /* loadingball.json in Resources */,
 				0419A6172A17B35000C161CB /* tennis.json in Resources */,
 				0419A6102A17897700C161CB /* football.json in Resources */,
 				041E9B0E2A1856C100608962 /* cricket.json in Resources */,
@@ -702,6 +709,7 @@
 				041A96212A1D471600E116DD /* NetworkManager.swift in Sources */,
 				044FF5672A17753D006B9160 /* LeaguesResponse.swift in Sources */,
 				0418FD822A1D0E940066F338 /* ViewModel.swift in Sources */,
+				048575322A283BA0004FF97B /* Headers.swift in Sources */,
 				0439D8492A26C0880018E2E5 /* TeamTableViewCell.swift in Sources */,
 				047A40C42A257569003AA838 /* LocalDbManager.swift in Sources */,
 				04CAEA832A1B962A00462F8D /* LeguesDetails.swift in Sources */,

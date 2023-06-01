@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,15 +14,64 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ntk-Xl-ksq">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="balls" translatesAutoresizingMaskIntoConstraints="NO" id="EHC-Ff-un3">
+                                        <rect key="frame" x="26" y="506" width="342" height="224"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="224" id="2ew-6w-N9Y"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcR-lk-iFR">
+                                        <rect key="frame" x="62" y="321" width="271.33333333333331" height="67"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="67" id="vmy-32-KU6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="56"/>
+                                        <color key="textColor" name="AccentColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="darkBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="EHC-Ff-un3" secondAttribute="bottom" constant="122" id="Ete-tx-SRI"/>
+                                    <constraint firstItem="xcR-lk-iFR" firstAttribute="leading" secondItem="ntk-Xl-ksq" secondAttribute="leading" constant="62" id="WEj-Yq-sCq"/>
+                                    <constraint firstItem="EHC-Ff-un3" firstAttribute="leading" secondItem="ntk-Xl-ksq" secondAttribute="leading" constant="26" id="jnv-sH-aqw"/>
+                                    <constraint firstAttribute="trailing" secondItem="EHC-Ff-un3" secondAttribute="trailing" constant="25" id="vMt-fM-sKV"/>
+                                    <constraint firstItem="xcR-lk-iFR" firstAttribute="top" secondItem="ntk-Xl-ksq" secondAttribute="top" constant="321" id="yJN-O7-Wui"/>
+                                    <constraint firstAttribute="trailing" secondItem="xcR-lk-iFR" secondAttribute="trailing" constant="59.670000000000002" id="zR4-qq-6BJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ntk-Xl-ksq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="12e-Lw-TW4"/>
+                            <constraint firstItem="ntk-Xl-ksq" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bHP-bW-tYc"/>
+                            <constraint firstAttribute="bottom" secondItem="ntk-Xl-ksq" secondAttribute="bottom" id="cJ1-oG-Sga"/>
+                            <constraint firstItem="ntk-Xl-ksq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="tGu-6S-N1r"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-86.25954198473282" y="23.943661971830988"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="balls" width="597" height="418"/>
+        <namedColor name="AccentColor">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="darkBlue">
+            <color red="0.050980392156862744" green="0.070588235294117646" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

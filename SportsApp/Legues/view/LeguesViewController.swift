@@ -1,12 +1,14 @@
 import UIKit
 import Kingfisher
 import Alamofire
+import Lottie
 //import Reachability
 
 
 class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet weak var legusTable: UITableView!
+    @IBOutlet weak var legusTable: UITableView!   
+    @IBOutlet weak var loading: LottieAnimationView!
     
     
     
@@ -28,6 +30,8 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
         viewModel = LegueViewModel(networkManager: networkManager)
         viewModel.bindResultToViewController = {[weak self ] in
             DispatchQueue.main.async { [self] in
+                self?.loading.stop()
+                self?.legusTable.isHidden = false
                 self?.leguesList = self?.viewModel.result
                 self!.legusTable.reloadData()
                 
@@ -57,7 +61,7 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        playLottie()
         viewModel.fetchLegues(url: url)
         legusTable.reloadData()
     }
@@ -106,6 +110,16 @@ class LeguesViewController: UIViewController ,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           performSegue(withIdentifier: "segue", sender: self)
  
+    
+    }
+    
+    
+    func playLottie(){
+        legusTable.isHidden = true
+        self.loading.contentMode = .scaleAspectFit
+        self.loading.loopMode = .loop
+        self.loading.animationSpeed = 0.5
+        self.loading.play()
     
     }
     

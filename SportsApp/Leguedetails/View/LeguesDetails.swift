@@ -6,6 +6,7 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
     
     @IBOutlet weak var favbtn: UIBarButtonItem!
     @IBOutlet weak var myCollection: UICollectionView!
+  
     var upcomingEventUrl :String!
     var latestResultUrl :String!
     var teamsUrl :String!
@@ -37,18 +38,10 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         print(latestResultUrl ?? "latest resultn url")
     }
     
-    
-
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         myCollection.reloadData()
         isLegueFav()
-     
-       // print("teams url \(String(describing: teamBaseUrl))\(String(describing: selectedRow.league_key))&APIkey=\(API_KEY)")
-        
-       // latestResult = [Result(),Result(),Result(),Result()]
         getTeams()
         getLeguesEventData()
         getLeguesLatestResultData()
@@ -97,22 +90,32 @@ func getLeguesLatestResultData(){
  
     }
     @IBAction func addToFavourite(_ sender: Any) {
-        
-        
-        let viewModel = FavouriteViewMoodel(networkManager: LocalDbManager.localDbManager)
+   
+        //let viewModel = FavouriteViewMoodel(networkManager: LocalDbManager.localDbManager)
         
         if isFav == false {
             
             favbtn.image = UIImage(systemName: "suit.heart.fill")
             favViewModel.insertLegue(favLegue: legue, upcomingEventUrl: upcomingEventUrl, latestResultUrl: latestResultUrl, teamsUrl: teamsUrl)
             isFav = true
-            viewModel.getLegues()
+            favViewModel.getLegues()
         }
         else{
             favbtn.image = UIImage(systemName: "suit.heart")
-            favViewModel.deleteLegue(legueName: legue.league_name ?? "Un Known")
-            isFav = false
-            viewModel.getLegues()
+            
+            let alert = UIAlertController(title: "Confirmation!", message: "Remove Legue..?", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { [self]_ in
+                self.favViewModel.deleteLegue(legueName:legue.league_name ?? "Un Known")
+                isFav = false
+                self.favViewModel.getLegues()
+        
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:{_ in
+                alert.dismiss(animated: true)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+         
         }
     }
     
@@ -142,6 +145,7 @@ func getLeguesLatestResultData(){
             
             if legue.league_key == self.legue.league_key{
                 self.favbtn.image = UIImage(systemName: "suit.heart.fill")
+                isFav = true
             }
         }
         
@@ -169,7 +173,10 @@ func getLeguesLatestResultData(){
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 16, trailing: 0)
-        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+                       let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                       
+                       section.boundarySupplementaryItems = [headerSupplementary]
         
         return section
     }
@@ -182,7 +189,12 @@ func getLeguesLatestResultData(){
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+                       let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                       
+                       section.boundarySupplementaryItems = [headerSupplementary]
         
         return section
     }
@@ -190,18 +202,38 @@ func getLeguesLatestResultData(){
     func drawTeamsSection()-> NSCollectionLayoutSection{
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(2))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35), heightDimension:  .absolute(130))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35), heightDimension:  .absolute(100))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+                       let headerSupplementary = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                       
+                       section.boundarySupplementaryItems = [headerSupplementary]
         return section
     }
     
-    
-     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+           let  sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "detailsHeader", for: indexPath) as? Headers
+               print("from section header")
+           if kind == UICollectionView.elementKindSectionHeader {
+                   
+                   switch(indexPath.section){
+                   case 0:
+                       sectionHeader!.sectionHeader.text = "Upcoming Events"
+                   case 1:
+                       sectionHeader!.sectionHeader.text = "Latest Events"
+                   default:
+                       sectionHeader!.sectionHeader.text = "Teams"
+                       
+                   }
+               }
+           return sectionHeader!
+       }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
@@ -223,6 +255,8 @@ func getLeguesLatestResultData(){
         
         switch indexPath.section {
         case 0 :
+            
+          
             let cell = myCollection.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! UpComingEventCell
             
             let url1 = URL(string: upComingEvents?[indexPath.row].home_team_logo ?? "")
