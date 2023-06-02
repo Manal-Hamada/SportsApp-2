@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,10 +24,12 @@
                                         <rect key="frame" x="26" y="506" width="342" height="224"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="224" id="2ew-6w-N9Y"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="224" id="C2S-S1-kqX"/>
+                                            <constraint firstAttribute="width" constant="342" id="IEL-f4-9Dc"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcR-lk-iFR">
-                                        <rect key="frame" x="62" y="321" width="271.33333333333331" height="67"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcR-lk-iFR">
+                                        <rect key="frame" x="15" y="321" width="370" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="67" id="vmy-32-KU6"/>
                                         </constraints>
@@ -38,12 +40,13 @@
                                 </subviews>
                                 <color key="backgroundColor" name="darkBlue"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xcR-lk-iFR" secondAttribute="trailing" constant="8" id="Dj4-ut-ky9"/>
                                     <constraint firstAttribute="bottom" secondItem="EHC-Ff-un3" secondAttribute="bottom" constant="122" id="Ete-tx-SRI"/>
-                                    <constraint firstItem="xcR-lk-iFR" firstAttribute="leading" secondItem="ntk-Xl-ksq" secondAttribute="leading" constant="62" id="WEj-Yq-sCq"/>
+                                    <constraint firstItem="xcR-lk-iFR" firstAttribute="leading" secondItem="ntk-Xl-ksq" secondAttribute="leading" constant="15" id="IL7-lT-fAd"/>
                                     <constraint firstItem="EHC-Ff-un3" firstAttribute="leading" secondItem="ntk-Xl-ksq" secondAttribute="leading" constant="26" id="jnv-sH-aqw"/>
+                                    <constraint firstItem="EHC-Ff-un3" firstAttribute="top" secondItem="xcR-lk-iFR" secondAttribute="bottom" constant="118" id="nIn-95-HgA"/>
                                     <constraint firstAttribute="trailing" secondItem="EHC-Ff-un3" secondAttribute="trailing" constant="25" id="vMt-fM-sKV"/>
                                     <constraint firstItem="xcR-lk-iFR" firstAttribute="top" secondItem="ntk-Xl-ksq" secondAttribute="top" constant="321" id="yJN-O7-Wui"/>
-                                    <constraint firstAttribute="trailing" secondItem="xcR-lk-iFR" secondAttribute="trailing" constant="59.670000000000002" id="zR4-qq-6BJ"/>
                                 </constraints>
                             </view>
                         </subviews>

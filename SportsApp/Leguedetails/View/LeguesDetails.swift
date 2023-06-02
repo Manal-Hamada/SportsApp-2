@@ -1,12 +1,14 @@
 import UIKit
 import Kingfisher
 import Alamofire
+import Lottie
 
 class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var favbtn: UIBarButtonItem!
     @IBOutlet weak var myCollection: UICollectionView!
-  
+
+    @IBOutlet weak var loading: LottieAnimationView!
     var upcomingEventUrl :String!
     var latestResultUrl :String!
     var teamsUrl :String!
@@ -25,7 +27,7 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         super.viewDidLoad()
         networkManager = NetworkManager()
         teamViewModel = TeamViewModel(networkManager: networkManager)
-     
+        playLottie()
         viewModel = ViewModel(networkManager: networkManager)
         localDbManager = LocalDbManager.localDbManager
         favViewModel = FavouriteViewMoodel(networkManager: localDbManager)
@@ -46,6 +48,8 @@ class LeguesDetails: UIViewController,UICollectionViewDataSource,UICollectionVie
         getLeguesEventData()
         getLeguesLatestResultData()
         setLayout()
+       
+
     }
     
 
@@ -65,6 +69,9 @@ func getLeguesEventData(){
 func getLeguesLatestResultData(){
     self.viewModel.bindLatestResultToViewController = {[weak self ] in
         DispatchQueue.main.async { [self] in
+            self!.loading.stop()
+            self?.loading.isHidden = true
+            self!.myCollection.isHidden = false
             self?.latestResult = self?.viewModel.latestResult
             self!.myCollection.reloadData()
             
@@ -80,14 +87,30 @@ func getLeguesLatestResultData(){
         
         self.teamViewModel?.bindTeamDetailsToViewController = {[weak self] in
             DispatchQueue.main.async {
+                if self?.myCollection.isHidden == true {
+                    
+                }
+                
                 self!.myCollection.reloadData()
                 print(self?.teamViewModel.getTeams().count ?? "No teams")
-                
+               
             }
+           
         }
- 
+       
         teamViewModel.getTeamDetails(url:teamsUrl)
- 
+    
+    }
+    
+    
+    func playLottie(){
+        myCollection.isHidden = true
+        loading.contentMode = .scaleToFill
+        loading.loopMode = .loop
+        loading.animationSpeed = 0.5
+        loading.play()
+        
+    
     }
     @IBAction func addToFavourite(_ sender: Any) {
    
@@ -125,6 +148,7 @@ func getLeguesLatestResultData(){
             switch index{
             case 0 :
                 return self.drawTheTopSection()
+                
                 
             case 1:
                 return self.drawLatestResultSection()
@@ -168,7 +192,7 @@ func getLeguesLatestResultData(){
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension:  .absolute(170))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous

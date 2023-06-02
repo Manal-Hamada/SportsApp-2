@@ -32,7 +32,7 @@ var tennisTeamsBaseUrl = "https://apiv2.allsportsapi.com/tennis/?&met=Teams&leag
 var cricketTeamsBaseUrl = "https://apiv2.allsportsapi.com/cricket/?&met=Teams&leagueId="
 var urlEndPoints = [footballUrl,basketballUrl,cricketUrl,tennisUrl]
 
-var homeLotties = [HomeCell(fileName:"footballplayer",name: "Football"),HomeCell (fileName:"basketballplayer",name: "Basketball"),HomeCell(fileName:"cricketplayer",name: "Cricket"),HomeCell(fileName:"tennisplayer",name: "Tennis")]
+var homeLotties = [HomeCell(fileName:"fo",name: "Football"),HomeCell (fileName:"bas",name: "Basketball"),HomeCell(fileName:"cr",name: "Cricket"),HomeCell(fileName:"ten",name: "Tennis")]
 
 
 func getDate(){

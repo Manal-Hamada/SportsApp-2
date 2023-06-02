@@ -7,11 +7,13 @@
 
 import UIKit
 import Kingfisher
+import Lottie
 
 class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource{
 
     @IBOutlet weak var favTable: UITableView!
-    @IBOutlet weak var empty: UIImageView!
+    @IBOutlet weak var empty: LottieAnimationView!
+    
     
     var localDbManager:LocalDbManagerType!
     var viewModel : FavouriteViewMoodel!
@@ -20,32 +22,43 @@ class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableView
         localDbManager = LocalDbManager.localDbManager
         viewModel = FavouriteViewMoodel(networkManager: localDbManager)
         displayCellView()
-        
-      
+  
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
         viewModel.bindFavLeguesToViewController = {
             [weak self] in
             DispatchQueue.main.async {
-               
                 if (self!.viewModel.legues.count == 0){
-                    self?.empty.isHidden = false
-                    self?.favTable.isHidden = true
+                    //self?.playLottie()
                 }else{
+                 
+                    self!.empty.stop()
                     self?.empty.isHidden = true
-                    self?.favTable.isHidden = false
+                    self!.favTable.isHidden = false
                 }
                 
                 self?.favTable.reloadData()
             }
         }
+        
+        
+        /*  let reachability = try! Reachability()
+         if reachability.connection != .unavailable{
+               viewModel.getLegues()
+         }
+         else{
+         let alert : UIAlertController = UIAlertController(title: "ALERT!", message: "No Connection", preferredStyle: .alert)
+         
+         alert.addAction(UIAlertAction(title: "OK", style: .cancel,handler: nil))
+         self.present(alert, animated: true, completion: nil)
+         }*/
         viewModel.getLegues()
         viewModel.bindFavModelsToViewController = {
             [weak self] in
             DispatchQueue.main.async {
-               
-        
+     
             }
         }
         viewModel.getLegues()
@@ -53,6 +66,14 @@ class FavouriteViewController: UIViewController ,UITableViewDelegate,UITableView
         favTable.reloadData()
     }
     
+    func playLottie(){
+        favTable.isHidden = true
+        self.empty.contentMode = .scaleAspectFit
+        self.empty.loopMode = .loop
+        self.empty.animationSpeed = 0.5
+        self.empty.play()
+    
+    }
  
     
     func displayCellView(){

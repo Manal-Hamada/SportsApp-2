@@ -44,6 +44,7 @@
 		047E21972A1EA09F003E29C6 /* LegueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047E21962A1EA09F003E29C6 /* LegueViewModel.swift */; };
 		048575322A283BA0004FF97B /* Headers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048575312A283BA0004FF97B /* Headers.swift */; };
 		048575342A284279004FF97B /* loadingball.json in Resources */ = {isa = PBXBuildFile; fileRef = 048575332A284279004FF97B /* loadingball.json */; };
+		048575362A2850A1004FF97B /* emptylottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 048575352A2850A1004FF97B /* emptylottie.json */; };
 		04CAEA832A1B962A00462F8D /* LeguesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAEA822A1B962A00462F8D /* LeguesDetails.swift */; };
 		04CAEA8C2A1B998300462F8D /* UpComingEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAEA8B2A1B998300462F8D /* UpComingEventCell.swift */; };
 		04CAEA8E2A1B999800462F8D /* LatestResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAEA8D2A1B999700462F8D /* LatestResultCell.swift */; };
@@ -112,6 +113,7 @@
 		047E21962A1EA09F003E29C6 /* LegueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegueViewModel.swift; sourceTree = "<group>"; };
 		048575312A283BA0004FF97B /* Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headers.swift; sourceTree = "<group>"; };
 		048575332A284279004FF97B /* loadingball.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingball.json; sourceTree = "<group>"; };
+		048575352A2850A1004FF97B /* emptylottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptylottie.json; sourceTree = "<group>"; };
 		04CAEA822A1B962A00462F8D /* LeguesDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeguesDetails.swift; sourceTree = "<group>"; };
 		04CAEA8B2A1B998300462F8D /* UpComingEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingEventCell.swift; sourceTree = "<group>"; };
 		04CAEA8D2A1B999700462F8D /* LatestResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestResultCell.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		0419A6112A1789A000C161CB /* Lotties */ = {
 			isa = PBXGroup;
 			children = (
+				048575352A2850A1004FF97B /* emptylottie.json */,
 				048575332A284279004FF97B /* loadingball.json */,
 				041E9B0D2A1856C000608962 /* cricket.json */,
 				0419A6182A17B35C00C161CB /* basketball.json */,
@@ -575,6 +578,7 @@
 				0419A6102A17897700C161CB /* football.json in Resources */,
 				041E9B0E2A1856C100608962 /* cricket.json in Resources */,
 				047A40BF2A256909003AA838 /* LegueTableViewCell.xib in Resources */,
+				048575362A2850A1004FF97B /* emptylottie.json in Resources */,
 				0419A6192A17B35C00C161CB /* basketball.json in Resources */,
 				041B7B0F2A16D5E0000110AA /* Assets.xcassets in Resources */,
 				041B7B0A2A16D5DE000110AA /* Main.storyboard in Resources */,
